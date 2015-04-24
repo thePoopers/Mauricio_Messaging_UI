@@ -43,6 +43,7 @@ public class MessagingActivity extends Activity {
     private String currentUserId;
     private ServiceConnection serviceConnection = new MyServiceConnection();
     private MessageClientListener messageClientListener = new MyMessageClientListener();
+    private EditText userNameTextBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,9 @@ public class MessagingActivity extends Activity {
         Intent intent = getIntent();
         recipientId = intent.getStringExtra("RECIPIENT_ID");
         currentUserId = ParseUser.getCurrentUser().getObjectId();
+        String uId = intent.getStringExtra("RECIPIENT_USER_NAME");
+        userNameTextBox = (EditText) findViewById(R.id.user_name_text_box);
+        userNameTextBox.setText(uId);
 
         messagesList = (ListView) findViewById(R.id.listMessages);
         messageAdapter = new MessageAdapter(this);

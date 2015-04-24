@@ -93,7 +93,7 @@ public class ListUsersActivity extends Activity {
 
 
     //open a conversation with one person
-    public void openConversation(ArrayList<String> names, int pos) {
+    public void openConversation(final ArrayList<String> names, final int pos) {
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", names.get(pos));
         query.findInBackground(new FindCallback<ParseUser>() {
@@ -101,6 +101,7 @@ public class ListUsersActivity extends Activity {
                if (e == null) {
                    Intent intent = new Intent(getApplicationContext(), MessagingActivity.class);
                    intent.putExtra("RECIPIENT_ID", user.get(0).getObjectId());
+                   intent.putExtra("RECIPIENT_USER_NAME", names.get(pos));
                    startActivity(intent);
                } else {
                    Toast.makeText(getApplicationContext(),

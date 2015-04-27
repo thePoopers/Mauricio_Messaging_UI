@@ -65,7 +65,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".materialtest.ActivityUsingTabLibrary"/>
         </activity>
-
+        <activity
+            android:name=".MessagingActivity"
+            android:label="MessagingActivity">
+        </activity>
         <service android:name="com.parse.PushService" />
         <receiver android:name="com.parse.ParseBroadcastReceiver">
             <intent-filter>

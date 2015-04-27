@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:text="BUY"
         android:id="@+id/button_buy"
-        android:layout_gravity="right|center_vertical" />
+        android:layout_gravity="right|center_vertical"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"

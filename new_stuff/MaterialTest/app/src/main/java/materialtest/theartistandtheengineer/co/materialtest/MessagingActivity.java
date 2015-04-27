@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -57,6 +58,7 @@ public class MessagingActivity extends Activity {
         Intent intent = getIntent();
         recipientId = intent.getStringExtra("RECIPIENT_ID");
         currentUserId = ParseUser.getCurrentUser().getObjectId();
+        Log.d("MainActivityGetObjId", "Id of current user is: "+currentUserId);
 
         messagesList = (ListView) findViewById(R.id.listMessages);
         messageAdapter = new MessageAdapter(this);
@@ -71,6 +73,12 @@ public class MessagingActivity extends Activity {
                 sendMessage();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     //get previous messages from parse & display
@@ -233,6 +241,9 @@ public class MessagingActivity extends Activity {
 
         @Override
         public void onShouldSendPushData(MessageClient client, Message message, List<PushPair> pushPairs) {}
+
+
+
     }
 }
 

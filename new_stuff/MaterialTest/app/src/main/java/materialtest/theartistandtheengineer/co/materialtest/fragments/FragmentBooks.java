@@ -2,6 +2,7 @@ package materialtest.theartistandtheengineer.co.materialtest.fragments;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,11 +20,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.parse.FindCallback;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import materialtest.theartistandtheengineer.co.materialtest.ListUsersActivity;
+import materialtest.theartistandtheengineer.co.materialtest.MessagingActivity;
 import materialtest.theartistandtheengineer.co.materialtest.R;
 import materialtest.theartistandtheengineer.co.materialtest.adapters.AdapterSearch;
 import materialtest.theartistandtheengineer.co.materialtest.app.AppController;
@@ -155,7 +163,27 @@ public class FragmentBooks extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Log.d("BUTTON!!! ", String.valueOf(v));
-        Log.d("BOOK INFO!!! ", bookInfo.getText().toString());
+        //Open messaging activity with bogus ID's.
+        Log.d("current_user_check", ParseUser.getCurrentUser().getUsername());
+        ArrayList<String> testList = new ArrayList<>();
+        testList.add(0, "martinez@knights.ucf.edu");
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("username", "martinez@knights.ucf.edu");
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> user, com.parse.ParseException e) {
+                if (e == null) {
+                    Log.d("Query_finder_test", "User list size"+user.size()+" Username: "+user.get(0)
+                            .getUsername()+" User Id: "+user.get(0).getObjectId());
+                    String recipientId = user.get(0).getObjectId();
+                    Intent intent = new Intent(getActivity(), MessagingActivity.class);
+                    intent.putExtra("RECIPIENT_ID", recipientId);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(),
+                            "Error finding that user",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

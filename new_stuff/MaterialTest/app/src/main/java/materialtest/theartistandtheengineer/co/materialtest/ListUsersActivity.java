@@ -79,7 +79,7 @@ public class ListUsersActivity extends Activity {
                     usersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> a, View v, int i, long l) {
-                            openConversation(names, i);
+                            openConversation(names, i, getApplicationContext());
                         }
                     });
 
@@ -94,17 +94,17 @@ public class ListUsersActivity extends Activity {
 
 
     //open a conversation with one person
-    public void openConversation(ArrayList<String> names, int pos) {
+    public void openConversation(ArrayList<String> names, int pos, final Context context) {
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", names.get(pos));
         query.findInBackground(new FindCallback<ParseUser>() {
            public void done(List<ParseUser> user, com.parse.ParseException e) {
                if (e == null) {
-                   Intent intent = new Intent(getApplicationContext(), MessagingActivity.class);
+                   Intent intent = new Intent(context, MessagingActivity.class);
                    intent.putExtra("RECIPIENT_ID", user.get(0).getObjectId());
                    startActivity(intent);
                } else {
-                   Toast.makeText(getApplicationContext(),
+                   Toast.makeText(context,
                        "Error finding that user",
                            Toast.LENGTH_SHORT).show();
                }

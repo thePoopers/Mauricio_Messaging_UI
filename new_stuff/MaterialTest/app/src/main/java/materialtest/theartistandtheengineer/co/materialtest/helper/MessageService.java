@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 import com.parse.ParseUser;
 import com.sinch.android.rtc.ClientRegistration;
@@ -43,8 +44,13 @@ public class MessageService extends Service implements SinchClientListener {
     }
 
     public void startSinchClient(String username) {
-        sinchClient = Sinch.getSinchClientBuilder().context(this).userId(username).applicationKey(APP_KEY)
-                .applicationSecret(APP_SECRET).environmentHost(ENVIRONMENT).build();
+        sinchClient = Sinch.getSinchClientBuilder()
+                .context(this)
+                .userId(username)
+                .applicationKey(APP_KEY)
+                .applicationSecret(APP_SECRET)
+                .environmentHost(ENVIRONMENT)
+                .build();
 
         sinchClient.addSinchClientListener(this);
 
@@ -53,6 +59,9 @@ public class MessageService extends Service implements SinchClientListener {
 
         sinchClient.checkManifest();
         sinchClient.start();
+        if (isSinchClientStarted()) {
+            Log.d("MessagingService", "sinch is started");
+        }
     }
 
     private boolean isSinchClientStarted() {
@@ -61,6 +70,7 @@ public class MessageService extends Service implements SinchClientListener {
 
     @Override
     public void onClientFailed(SinchClient client, SinchError error) {
+        Log.d("OnClientFailed", "entered on client failed method");
         broadcastIntent.putExtra("success", false);
         broadcaster.sendBroadcast(broadcastIntent);
 
@@ -98,6 +108,8 @@ public class MessageService extends Service implements SinchClientListener {
         if (messageClient != null) {
             WritableMessage message = new WritableMessage(recipientUserId, textBody);
             messageClient.send(message);
+        } else {
+            Log.e("MessageClient", "Message client is null");
         }
     }
 

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import materialtest.theartistandtheengineer.co.materialtest.helper.SessionManage
 
 public class MainActivity extends Activity {
 
+    private String TAG = MainActivity.class.toString();
 	private TextView txtName;
 	private TextView txtEmail;
 	private Button btnLogout;
@@ -97,6 +99,11 @@ public class MainActivity extends Activity {
 	 * preferences Clears the user data from sqlite users table
 	 * */
 	private void logoutUser() {
+        //Log out of messaging
+        Log.d(TAG, "User being logged out of parse");
+//        stopService(new Intent(getApplicationContext(), MessageService.class));
+//        ParseUser.logOut();
+
 		session.setLogin(false);
 
 		db.deleteUsers();

@@ -1,7 +1,6 @@
 package materialtest.theartistandtheengineer.co.materialtest.fragments;
 
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,27 +13,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.parse.FindCallback;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import materialtest.theartistandtheengineer.co.materialtest.ListUsersActivity;
 import materialtest.theartistandtheengineer.co.materialtest.MessagingActivity;
 import materialtest.theartistandtheengineer.co.materialtest.R;
 import materialtest.theartistandtheengineer.co.materialtest.adapters.AdapterSearch;
 import materialtest.theartistandtheengineer.co.materialtest.app.AppController;
-import materialtest.theartistandtheengineer.co.materialtest.materialtest.MyApplication;
 import materialtest.theartistandtheengineer.co.materialtest.network.VolleySingleton;
 import materialtest.theartistandtheengineer.co.materialtest.pojo.Book;
 
@@ -166,9 +157,9 @@ public class FragmentBooks extends Fragment implements View.OnClickListener {
         //Open messaging activity with bogus ID's.
         Log.d("current_user_check", ParseUser.getCurrentUser().getUsername());
         ArrayList<String> testList = new ArrayList<>();
-        testList.add(0, "martinez@knights.ucf.edu");
+        testList.add(0, "m_mcgee@knights.ucf.edu");
         ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereEqualTo("username", "martinez@knights.ucf.edu");
+        query.whereEqualTo("username", "m_mcgee@knights.ucf.edu");
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> user, com.parse.ParseException e) {
                 if (e == null) {

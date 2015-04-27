@@ -64,10 +64,10 @@ public class LoginActivity extends Activity {
 
         //Messaging service
         serviceIntent = new Intent(getApplicationContext(), MessageService.class);
-        ParseUser user = ParseUser.getCurrentUser();
-        if ( user != null) {
-            startService(serviceIntent);
-        }
+//        ParseUser user = ParseUser.getCurrentUser();
+//        if ( user != null) {
+//            startService(serviceIntent);
+//        }
 
 		// Check if user is already logged in or not
 		if (session.isLoggedIn()) {

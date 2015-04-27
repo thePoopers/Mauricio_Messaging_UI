@@ -8,10 +8,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.PushService;
+import com.parse.SaveCallback;
 
-import materialtest.theartistandtheengineer.co.materialtest.RegisterActivity;
+import materialtest.theartistandtheengineer.co.materialtest.MainActivity;
 
 public class AppController extends Application {
 
@@ -33,8 +35,12 @@ public class AppController extends Application {
 
         //intitialize messaging
         Parse.initialize(this, APP_ID, CLIENT_KEY);
-        PushService.setDefaultPushCallback(this, RegisterActivity.class);
-        ParseInstallation.getCurrentInstallation().saveInBackground();
+        ParseInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                PushService.setDefaultPushCallback(AppController.this, MainActivity.class);
+            }
+        });
 	}
 
 	public static synchronized AppController getInstance() {

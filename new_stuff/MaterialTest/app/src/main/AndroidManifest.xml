@@ -65,9 +65,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".materialtest.ActivityUsingTabLibrary"/>
         </activity>
+        <service android:name=".helper.MessageService"></service>
         <activity
             android:name=".MessagingActivity"
-            android:label="MessagingActivity">
+            android:label="MessagingActivity"
+            android:screenOrientation="portrait">
         </activity>
         <service android:name="com.parse.PushService" />
         <receiver android:name="com.parse.ParseBroadcastReceiver">

@@ -39,7 +39,7 @@
                 android:layout_below="@+id/txtSender"
                 android:layout_alignParentLeft="true"
                 android:padding="12dp"
-                android:background="@drawable/grey_ucf"
+                android:background="@drawable/black_bubble"
                 >
 
             <TextView
@@ -47,7 +47,7 @@
                     android:paddingLeft="12dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/ucf_yellow"
                     android:textSize="14sp"
                     android:text="Hello"
                     />

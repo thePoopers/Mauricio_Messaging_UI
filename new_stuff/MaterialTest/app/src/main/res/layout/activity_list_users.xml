@@ -12,10 +12,10 @@
         android:id="@+id/logoutButton"
         android:gravity="center_vertical|center_horizontal"
         android:layout_gravity="center_horizontal"
-        android:background="@android:color/darker_gray"
+        android:background="@color/ucf_black"
         android:textSize="24sp"
         android:padding="15dp"
-        android:textColor="@android:color/black" />
+        android:textColor="@color/ucf_yellow" />
 
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

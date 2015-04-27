@@ -23,6 +23,11 @@
     <color name="btn_login_bg">#eceef1</color>
     <color name="lbl_name">#333333</color>
     <color name="btn_logut_bg">#ffc904</color>
+
+    <color name="ucf_yellow">#EDE107</color>
+    <color name="ucf_black">#020000</color>
+    <color name="ucf_gold">#CC9900</color>
+    <color name="very_dark_gray">#636363</color>
 </resources>
 
     <!--Slidenerd video #23

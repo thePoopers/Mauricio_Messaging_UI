@@ -177,6 +177,7 @@ public class FragmentBooks extends Fragment implements View.OnClickListener {
                     String recipientId = user.get(0).getObjectId();
                     Intent intent = new Intent(getActivity(), MessagingActivity.class);
                     intent.putExtra("RECIPIENT_ID", recipientId);
+                    intent.putExtra("RECIPIENT_USER_NAME", user.get(0).getUsername());
                     startActivity(intent);
                 } else {
                     Toast.makeText(getActivity().getApplicationContext(),

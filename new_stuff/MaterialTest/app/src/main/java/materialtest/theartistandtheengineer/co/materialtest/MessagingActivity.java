@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -47,6 +48,7 @@ public class MessagingActivity extends Activity {
     private String currentUserId;
     private ServiceConnection serviceConnection = new MyServiceConnection();
     private MessageClientListener messageClientListener = new MyMessageClientListener();
+    private TextView recipientBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,9 @@ public class MessagingActivity extends Activity {
         populateMessageHistory();
 
         messageBodyField = (EditText) findViewById(R.id.messageBodyField);
+
+        recipientBar = (TextView)findViewById(R.id.user_name_text_box);
+        recipientBar.setText(intent.getStringExtra("RECIPIENT_USER_NAME"));
 
         findViewById(R.id.sendButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +111,11 @@ public class MessagingActivity extends Activity {
     }
 
     private void sendMessage() {
+        if (messageService == null) {
+            Log.d("serviceNullTest", "MESSAGE SERVICE IS NULL");
+        } else {
+            Log.d("serviceNullTest", "Service not null");
+        }
         messageBody = messageBodyField.getText().toString();
         if (messageBody.isEmpty()) {
             Toast.makeText(this, "Please enter a message", Toast.LENGTH_LONG).show();

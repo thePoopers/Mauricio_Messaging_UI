@@ -156,6 +156,7 @@ public class MessagingActivity extends Activity {
 
         @Override
         public void onIncomingMessage(MessageClient client, Message message) {
+            Log.d("MessagingActivity", "Message incoming to:" + message.getRecipientIds()+" Message from: "+message.getSenderId());
             if (message.getSenderId().equals(recipientId)) {
                 WritableMessage writableMessage = new WritableMessage(message.getRecipientIds().get(0), message.getTextBody());
                 messageAdapter.addMessage(writableMessage, MessageAdapter.DIRECTION_INCOMING);

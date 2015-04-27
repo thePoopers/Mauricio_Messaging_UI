@@ -78,6 +78,7 @@ public class MessagingActivity extends Activity {
                 sendMessage();
             }
         });
+
     }
 
     @Override

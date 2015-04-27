@@ -1,11 +1,17 @@
 package materialtest.theartistandtheengineer.co.materialtest;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -20,6 +26,9 @@ public class MainActivity extends Activity {
 
 	private SQLiteHandler db;
 	private SessionManager session;
+
+    private ProgressDialog progressDialog;
+    private BroadcastReceiver receiver = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +59,9 @@ public class MainActivity extends Activity {
 		txtName.setText(name);
 		txtEmail.setText(email);
 
+        //Start sinch messaging service
+       startSinch();
+
 		// Logout button click event
 		btnLogout.setOnClickListener(new View.OnClickListener() {
 
@@ -59,6 +71,21 @@ public class MainActivity extends Activity {
 			}
 		});
 	}
+
+    //show a loading spinner while the sinch client starts
+    private void startSinch() {
+        receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Boolean success = intent.getBooleanExtra("success", false);
+                if (!success) {
+                    Toast.makeText(getApplicationContext(), "Messaging service failed to start", Toast.LENGTH_LONG).show();
+                }
+            }
+        };
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("materialtest.theartistandtheengineer.co.materialtest.MainActivity"));
+    }
 
 	/**
 	 * Logging out the user. Will set isLoggedIn flag to false in shared

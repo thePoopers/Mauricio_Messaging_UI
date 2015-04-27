@@ -62,6 +62,13 @@ public class LoginActivity extends Activity {
 		// Session manager
 		session = new SessionManager(getApplicationContext());
 
+        //Messaging service
+        serviceIntent = new Intent(getApplicationContext(), MessageService.class);
+        ParseUser user = ParseUser.getCurrentUser();
+        if ( user != null) {
+            startService(serviceIntent);
+        }
+
 		// Check if user is already logged in or not
 		if (session.isLoggedIn()) {
 			// User is already logged in. Take him to main activity
@@ -69,9 +76,6 @@ public class LoginActivity extends Activity {
 			startActivity(intent);
 			finish();
 		}
-
-        //Messaging service
-        serviceIntent = new Intent(getApplicationContext(), MessageService.class);
 
 		// Login button Click Event
 		btnLogin.setOnClickListener(new View.OnClickListener() {
